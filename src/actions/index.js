@@ -21,7 +21,7 @@ export const loginUser = ({ email, password }) => {
                  'Accept': 'application/json',           
                 'Content-Type': 'application/json'
             },
-            body:JSON.stringify({
+            body: JSON.stringify({
                 name: 'generateToken',
                 param: {
                     email,
@@ -34,7 +34,7 @@ export const loginUser = ({ email, password }) => {
                 dispatch({ type: LOGIN_USER_SUCCESS, payload: data });           
             })
             .catch(() => {
-                dispatch({type: LOGIN_USER_FAILED })
+                dispatch({ type: LOGIN_USER_FAILED });
             });
     };
 };

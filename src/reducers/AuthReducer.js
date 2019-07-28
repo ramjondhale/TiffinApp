@@ -1,7 +1,12 @@
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS} from '../actions/types';
+import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS } from '../actions/types';
 
+const INITIAL_STATE = { 
+    email: '',
+    password: '',
+    token: null,
+    error: ''    
+ };
 
-const INITIAL_STATE = { email: '', password: '' };
 export default (state = INITIAL_STATE, action) => {
     console.log(action);
    switch (action.type) {
