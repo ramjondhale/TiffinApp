@@ -1,5 +1,5 @@
 
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAILED } from './types';
+import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAILED ,LOGIN_ERROR, LOGIN_USER } from './types';
 
 export const emailChanged = (text) => {
     return {
@@ -15,6 +15,7 @@ export const passwordChanged = (text) => {
 };
 export const loginUser = ({ email, password }) => {
     return (dispatch) => {
+        dispatch({ type: LOGIN_USER });
         fetch('http://192.168.43.174/api/', {
             method: 'POST',
             headers: {    
@@ -31,10 +32,17 @@ export const loginUser = ({ email, password }) => {
            
             }).then((response) => response.json())
             .then((data) => {
-                dispatch({ type: LOGIN_USER_SUCCESS, payload: data });           
+                const { result } = data.response;
+                if (result.token) {
+
+                    dispatch({ type: LOGIN_USER_SUCCESS, payload: result.token });     
+                } else {
+                    dispatch({type: LOGIN_USER_FAILED, payload: result })
+                }
+                      
             })
             .catch(() => {
-                dispatch({ type: LOGIN_USER_FAILED });
+                dispatch({ type: LOGIN_ERROR });
             });
     };
 };
