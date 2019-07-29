@@ -1,9 +1,9 @@
 import React, { Component } from 'react'; 
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Appbar, Card, Button, TextInput,  ActivityIndicator 
+import { Card, Button, TextInput, ActivityIndicator 
 } from 'react-native-paper';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser, getToken } from '../actions';
 
 class LoginForm extends Component {
     onEmailChange(text) {
@@ -15,6 +15,10 @@ class LoginForm extends Component {
     onButtonPress() {
         const { email, password } = this.props;
         this.props.loginUser({ email, password });
+    }
+
+    onGetToken() {
+        this.props.getToken();
     }
 
     renderError() {
@@ -30,12 +34,11 @@ class LoginForm extends Component {
     }
 
     renderMessage() {
-        if (this.props.token) {
+        if (this.props.login) {
             return (
                 <View style={{ backgroundColor: 'white' }}>
                     <Text style={styles.messageStyle}>
-                    'Login Successful.
-                    token: '{this.props.token}
+                    Login Successful.                   
                     </Text>
                 </View>
             );
@@ -64,11 +67,6 @@ class LoginForm extends Component {
         
         <View>
         
-        <Appbar.Header>
-            <Appbar.Content
-                title="Login"
-            />
-        </Appbar.Header>
         <Card>
             <Card.Content>
             <TextInput
@@ -93,6 +91,16 @@ class LoginForm extends Component {
             <Card.Content>
            
             {this.renderButton()}
+            </Card.Content>
+
+            <Card.Content>
+                <Button
+                mode="outlined" onPress={this.onGetToken.bind(this)}
+                
+                style={styles.buttonStyle}           
+                >
+                Get Token
+                </Button>
             </Card.Content>
            
         </Card>
@@ -131,7 +139,9 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-    const { email, password, error, token, loading } = auth;
-    return { email, password, error, token, loading };
+    const { email, password, error, loading, login } = auth;
+    return { email, password, error, loading, login };
     };
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm);
+export default connect(mapStateToProps,
+     { emailChanged, passwordChanged, loginUser, getToken }
+     )(LoginForm);

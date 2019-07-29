@@ -4,3 +4,5 @@ export const LOGIN_USER_SUCCESS = 'login user succes';
 export const LOGIN_USER_FAILED = 'login_user_failed';
 export const LOGIN_ERROR = 'login_error';
 export const LOGIN_USER = 'login_user';
+
+export const FORM_UPDATE = 'form_update';

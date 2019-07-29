@@ -5,7 +5,7 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
-import LoginForm from './component/LoginForm';
+import Router from './Router';
 
 
 const theme = {
@@ -24,9 +24,7 @@ class App extends Component {
         <Provider store={store}>
         
         <PaperProvider>
-
-        <LoginForm />
-        
+          <Router />       
       
         </PaperProvider>
         </Provider> 
