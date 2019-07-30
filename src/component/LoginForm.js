@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { Card, Button, TextInput, ActivityIndicator 
 } from 'react-native-paper';
 import { emailChanged, passwordChanged, loginUser, getToken } from '../actions';
@@ -17,8 +18,8 @@ class LoginForm extends Component {
         this.props.loginUser({ email, password });
     }
 
-    onGetToken() {
-        this.props.getToken();
+    onSignUp() {
+        Actions.signup();
     }
 
     renderError() {
@@ -61,7 +62,6 @@ class LoginForm extends Component {
         );
     }
 
-
     render() {
         return (
         
@@ -95,11 +95,11 @@ class LoginForm extends Component {
 
             <Card.Content>
                 <Button
-                mode="outlined" onPress={this.onGetToken.bind(this)}
-                
+                mode="outlined" 
+                onPress={this.onSignUp.bind(this)}
                 style={styles.buttonStyle}           
                 >
-                Get Token
+                Sign Up
                 </Button>
             </Card.Content>
            
