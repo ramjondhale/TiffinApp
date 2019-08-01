@@ -19,7 +19,7 @@ class LoginForm extends Component {
     }
 
     onSignUp() {
-        Actions.signup();
+        Actions.signUp();
     }
 
     renderError() {
