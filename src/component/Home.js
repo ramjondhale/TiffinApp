@@ -1,60 +1,52 @@
-
- import React, { Component } from 'react';
- import { Text, View } from 'react-native';
- //import Icon from 'react-native-vector-icons/MaterialIcons';
- import TabBar from '@mindinventory/react-native-tab-bar-interaction';
-
-// class Home extends Component {
-//     render() {
-//          return (
-//             <View>
-//             <Text> hello </Text> 
-//             </View>
-//          );
-//     }
-// }
-
-// export default Home;
+import React, { Component } from 'react';
+import { createMaterialTopTabNavigator, createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Menu from './Menu';
+import Features from './Features';
+import SubscriptionPlans from './SubscriptionPlans';
+import Subscriptions from './Subscriptions';
+import OrderDetails from './OrderDetail';
+import OrderHistory from './OrderHistory';
 
 
 class Home extends Component {
-      render() {
-      return (      
-          
-           <TabBar>
-            <TabBar.Item
-                icon={require('./home1.png')}
-                selectedIcon={require('./home.png')}
-                title="Home"
-                screenBackgroundColor={{ backgroundColor: '#008080' }}
-            >
-              <View>
-                 <Text> Home</Text>
-              </View>
-            </TabBar.Item>
-            <TabBar.Item
-                icon={require('./sub1.png')}
-                selectedIcon={require('./sub2.png')}
-                title="Subscriptions"
-                screenBackgroundColor={{ backgroundColor: '#F08080' }}
-            >
-                <View>
-                   <Text>Subscriptions</Text>
-                </View>
-            </TabBar.Item>
-            <TabBar.Item
-                icon={require('./acc1.png')}
-                selectedIcon={require('./acc2.png')}
-                title="Account"
-                screenBackgroundColor={{ backgroundColor: '#485d72' }}
-            >
-              <View>
-                  <Text>Account</Text>
-              </View>
-            </TabBar.Item>
-          </TabBar>
-      );
+    render() {
+        return (
+            
+            <AppContainer />
+        );
     }
 }
 
-    export default Home;
+const HomeTab = createMaterialTopTabNavigator({
+    Features: { screen: Features },
+    Menu: { screen: Menu } 
+});
+const SubscriptionTab = createMaterialTopTabNavigator({
+    SubscriptionPlans: { screen: SubscriptionPlans },
+    Subscriptions: { screen: Subscriptions } 
+});
+const OrderTab = createMaterialTopTabNavigator({
+    OrderDetails: { screen: OrderDetails },
+    OrderHistory: { screen: OrderHistory } 
+});
+
+const BottomTab = createBottomTabNavigator({
+    Home: { screen: HomeTab },
+    Subscription: { screen: SubscriptionTab },
+    Order: { screen: OrderTab }
+},
+{
+    navigationOptions: ({ navigation }) => {
+        const { routeName } = navigation.state.routes[navigation.state.index]
+        return {
+            headerTitle: routeName
+        };
+    }
+}
+);
+const StackNavigator = createStackNavigator({
+    BottomTab: { screen: BottomTab }
+});
+const AppContainer = createAppContainer(StackNavigator);
+export default Home;
