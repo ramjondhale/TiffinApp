@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { createMaterialTopTabNavigator, createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import Menu from './Menu';
 import Features from './Features';
 import SubscriptionPlans from './SubscriptionPlans';
 import Subscriptions from './Subscriptions';
 import OrderDetails from './OrderDetail';
 import OrderHistory from './OrderHistory';
-
+import tabBarIcons from './common/tabBarIcon';
+import Account from './Account';
 
 class Home extends Component {
     render() {
@@ -32,9 +33,31 @@ const OrderTab = createMaterialTopTabNavigator({
 });
 
 const BottomTab = createBottomTabNavigator({
-    Home: { screen: HomeTab },
-    Subscription: { screen: SubscriptionTab },
-    Order: { screen: OrderTab }
+    Home: { screen: HomeTab,
+        navigationOptions: {
+        tabBarLabel: 'Home',
+        tabBarIcon: tabBarIcons('home')
+      }
+    },
+    Subscription: { screen: SubscriptionTab,
+        navigationOptions: {
+            tabBarLabel: 'Subscription',
+            tabBarIcon: tabBarIcons('youtube-subscription')
+          } 
+        },
+    Order: { screen: OrderTab,
+        navigationOptions: {
+            tabBarLabel: 'Order',
+            tabBarIcon: tabBarIcons('calendar-check')
+          } 
+         },
+    Account: { screen: Account,
+        navigationOptions: {
+            tabBarLabel: 'Account',
+            tabBarIcon: tabBarIcons('account')
+          }     
+        }
+    
 },
 {
     navigationOptions: ({ navigation }) => {

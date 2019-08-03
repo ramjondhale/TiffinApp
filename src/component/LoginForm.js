@@ -6,7 +6,8 @@ import { Card, Button, TextInput, ActivityIndicator
 } from 'react-native-paper';
 import { emailChanged, passwordChanged, loginUser, getToken } from '../actions';
 
-class LoginForm extends Component {
+class LoginForm extends Component {    
+
     onEmailChange(text) {
         this.props.emailChanged(text);
     }
@@ -17,6 +18,7 @@ class LoginForm extends Component {
         const { email, password } = this.props;
         this.props.loginUser({ email, password });
     }
+    
 
     onSignUp() {
         Actions.signUp();
@@ -60,7 +62,7 @@ class LoginForm extends Component {
              Login
             </Button>
         );
-    }
+    }    
 
     render() {
         return (
