@@ -9,3 +9,6 @@ export const FORM_UPDATE = 'form_update';
 export const SIGN_UP = 'sign_up';
 export const SIGN_UP_ERROR = 'sign_up_error';
 export const SIGN_UP_SUCCESS = 'sign_up_success';
+
+export const FEATURES_FETCH_SUCCESS = 'features_fetch_success';
+export const FEATURES_FETCH_ERROR = 'features_fetch_error';

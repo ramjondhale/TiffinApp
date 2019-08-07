@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { createMaterialTopTabNavigator, createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
+import { createMaterialTopTabNavigator, createBottomTabNavigator,
+     createAppContainer, createStackNavigator } from 'react-navigation';
 
 import Menu from './Menu';
 import Features from './Features';
@@ -61,7 +62,7 @@ const BottomTab = createBottomTabNavigator({
 },
 {
     navigationOptions: ({ navigation }) => {
-        const { routeName } = navigation.state.routes[navigation.state.index]
+        const { routeName } = navigation.state.routes[navigation.state.index];
         return {
             headerTitle: routeName
         };

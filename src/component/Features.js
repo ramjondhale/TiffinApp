@@ -1,46 +1,52 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
-import { List, Colors } from 'react-native-paper';
+import { ScrollView, View, FlatList } from 'react-native';
+import { List, Colors, ActivityIndicator } from 'react-native-paper';
+import { connect } from 'react-redux';
+import { featuresFetch } from '../actions';
 
 class Features extends Component {
-    render() {
-        return (
-            <ScrollView>
-            
+    componentDidMount() {
+        this.props.featuresFetch();          
+    }
+    
+    renderList() {
+        if (this.props.loading) {
+            return (
+            <View>
+             <ActivityIndicator animating />;
+            </View>
+            ); 
+        } 
+       return (        
             <List.Section >
-                <List.Item
-                    title="Tasty Food."
-                  
-                    left={props => <List.Icon {...props} icon="star" color={Colors.purpleA400} />}
-                />
-                <List.Item
-                    title="Food served in HotPot."
-                  
-                    left={props => <List.Icon {...props} icon="star" color={Colors.purpleA400} />}
-                />
-                <List.Item
-                    title="Sweat Dish 3 days in week."
-                    
-                    left={props => <List.Icon {...props} icon="star" color={Colors.purpleA400} />}
-                />
-                <List.Item
-                    title="Non-Veg 2 days in week."
-                    
-                    left={props => <List.Icon {...props} icon="star" color={Colors.purpleA400} />}
-                />
-                <List.Item
-                    title="Free Home Delivery."
-                  
-                    left={props => <List.Icon {...props} icon="star" color={Colors.purpleA400} />}
-                />
-                <List.Item
-                    title="Best quality material used for Cooking."
-                   
-                    left={props => <List.Icon {...props} icon="star" color={Colors.purpleA400} />}
-                />
+            <FlatList 
+                data={this.props.data}
+                keyExtractor={item => item.id}
+                renderItem={({ item }) =>
+                (<List.Item
+                        title={item.feature}                            
+                        left={props => <List.Icon {...props} icon="star" color={Colors.purpleA400} />}
+                    />)}
+
+            />
             </List.Section>
-            </ScrollView>
-        );
+        
+       ); 
+    }
+    
+       
+    render() {     
+        console.log(this.props.data);
+              
+             return (
+               <ScrollView>
+                   {this.renderList()}
+               </ScrollView>
+            );
     }
 }
-export default Features;
+const mapStateToProps = ({ features }) => {
+    const { data, loading, error } = features;
+    return { data, loading, error };
+};
+export default connect(mapStateToProps, { featuresFetch })(Features);

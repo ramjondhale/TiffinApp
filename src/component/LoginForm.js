@@ -1,4 +1,5 @@
 import React, { Component } from 'react'; 
+import RNSecureStorage from 'rn-secure-storage';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -6,7 +7,15 @@ import { Card, Button, TextInput, ActivityIndicator
 } from 'react-native-paper';
 import { emailChanged, passwordChanged, loginUser, getToken } from '../actions';
 
-class LoginForm extends Component {    
+
+class LoginForm extends Component {   
+    // componentDidMount() {
+    //     RNSecureStorage.get('token').then((val) => {
+    //                    Actions.home();
+    //                    }).catch((err) => {
+    //                      alert(err);
+    //                    }); 
+    // } 
 
     onEmailChange(text) {
         this.props.emailChanged(text);
@@ -63,6 +72,7 @@ class LoginForm extends Component {
             </Button>
         );
     }    
+   
 
     render() {
         return (
