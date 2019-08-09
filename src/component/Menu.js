@@ -1,187 +1,60 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
-import { List, Colors } from 'react-native-paper';
+import { ScrollView, FlatList } from 'react-native';
+import { List } from 'react-native-paper';
+import { connect } from 'react-redux';
+import { menuFetch } from '../actions';
 
 class Menu extends Component {
+    componentDidMount() {
+        this.props.menuFetch();          
+    }
     
     render() {
         return (
             
             <ScrollView>
                 <List.Section title="Menu of the Week">
-                    <List.Accordion
-                    title="Monday"
-                    left={props => <List.Icon {...props} icon="label" />}
-                    >
-                    <List.Item 
-                    title="Aloo Mutter"                  
-                    />
-                    <List.Item 
-                    title="Baingan Masala"                    
-                    />
-                    <List.Item 
-                    title="Dal"                    
-                    />
-                    <List.Item 
-                    title="Jeera Rice"                    
-                    />
-                    <List.Item 
-                    title="Chapati"                    
-                    />
-                    <List.Item 
-                    title="Lonch,Kanda"                    
-                    />
-                    </List.Accordion>
+                    <FlatList 
+                            data={this.props.data}
+                            keyExtractor={item => item.id}
+                            //refreshing={this.props.refreshing}
+                            //onRefresh={this.props.menuFetch()}
+                            renderItem={({ item }) =>
+                            (<List.Accordion
+                                title={item.day}
+                                left={props => <List.Icon {...props} icon="label" />}
+                            >
+                                <List.Item 
+                                title={item.bhaji}                  
+                                />
+                                <List.Item 
+                                title={item.sbhaji}                    
+                                />
+                                <List.Item 
+                                title={item.dal}                  
+                                />
+                                <List.Item 
+                                title={item.rice}                    
+                                />
+                                <List.Item 
+                                title={item.chapati}                   
+                                />
+                                <List.Item 
+                                title={item.extras}                   
+                                />
+                            </List.Accordion>)}
 
-                    <List.Accordion
-                    title="Tuesday"
-                    left={props => <List.Icon {...props} icon="label" />}
-                    >
-                    <List.Item 
-                    title="Aloo Mutter"                  
-                    />
-                    <List.Item 
-                    title="Baingan Masala"                    
-                    />
-                    <List.Item 
-                    title="Dal"                    
-                    />
-                    <List.Item 
-                    title="Jeera Rice"                    
-                    />
-                    <List.Item 
-                    title="Chapati"                    
-                    />
-                    <List.Item 
-                    title="Lonch,Kanda"                    
-                    />
-                    </List.Accordion>
-
-                    <List.Accordion
-                    title="Wednesday"
-                    left={props => <List.Icon {...props} icon="label" />}
-                    >
-                    <List.Item 
-                    title="Aloo Mutter"                  
-                    />
-                    <List.Item 
-                    title="Baingan Masala"                    
-                    />
-                    <List.Item 
-                    title="Dal"                    
-                    />
-                    <List.Item 
-                    title="Jeera Rice"                    
-                    />
-                    <List.Item 
-                    title="Chapati"                    
-                    />
-                    <List.Item 
-                    title="Lonch,Kanda"                    
-                    />
-                    </List.Accordion>
-
-                    <List.Accordion
-                    title="Thursday"
-                    left={props => <List.Icon {...props} icon="label" />}
-                    >
-                    <List.Item 
-                    title="Aloo Mutter"                  
-                    />
-                    <List.Item 
-                    title="Baingan Masala"                    
-                    />
-                    <List.Item 
-                    title="Dal"                    
-                    />
-                    <List.Item 
-                    title="Jeera Rice"                    
-                    />
-                    <List.Item 
-                    title="Chapati"                    
-                    />
-                    <List.Item 
-                    title="Lonch,Kanda"                    
-                    />
-                    </List.Accordion>
-
-                    <List.Accordion
-                    title="Friday"
-                    left={props => <List.Icon {...props} icon="label" />}
-                    >
-                    <List.Item 
-                    title="Aloo Mutter"                  
-                    />
-                    <List.Item 
-                    title="Baingan Masala"                    
-                    />
-                    <List.Item 
-                    title="Dal"                    
-                    />
-                    <List.Item 
-                    title="Jeera Rice"                    
-                    />
-                    <List.Item 
-                    title="Chapati"                    
-                    />
-                    <List.Item 
-                    title="Lonch,Kanda"                    
-                    />
-                    </List.Accordion>
-
-                    <List.Accordion
-                    title="Saturday"
-                    left={props => <List.Icon {...props} icon="label" />}
-                    >
-                    <List.Item 
-                    title="Aloo Mutter"                  
-                    />
-                    <List.Item 
-                    title="Baingan Masala"                    
-                    />
-                    <List.Item 
-                    title="Dal"                    
-                    />
-                    <List.Item 
-                    title="Jeera Rice"                    
-                    />
-                    <List.Item 
-                    title="Chapati"                    
-                    />
-                    <List.Item 
-                    title="Lonch,Kanda"                    
-                    />
-                    </List.Accordion>
-
-                    <List.Accordion
-                    title="Sunday"
-                    left={props => <List.Icon {...props} icon="label" />}
-                    >
-                    <List.Item 
-                    title="Aloo Mutter"                  
-                    />
-                    <List.Item 
-                    title="Baingan Masala"                    
-                    />
-                    <List.Item 
-                    title="Dal"                    
-                    />
-                    <List.Item 
-                    title="Jeera Rice"                    
-                    />
-                    <List.Item 
-                    title="Chapati"                    
-                    />
-                    <List.Item 
-                    title="Lonch,Kanda"                    
-                    />
-                    </List.Accordion>
-                   
-                 </List.Section>
+                    />                
+                </List.Section>
             </ScrollView>
 
             
         );
     }
 }
-export default Menu;
+
+const mapStateToProps = ({ menu }) => {
+    const { data, loading, error, refreshing } = menu;
+    return { data, loading, error, refreshing };
+};
+export default connect(mapStateToProps, { menuFetch })(Menu);

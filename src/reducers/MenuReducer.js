@@ -1,4 +1,4 @@
-import { FEATURES_FETCH_SUCCESS, FEATURES_FETCH_ERROR, FEATURES_FETCHING } from '../actions/types';
+import { MENU_FETCH_SUCCESS, MENU_FETCH_ERROR, MENU_FETCHING } from '../actions/types';
 
 const INITIAL_STATE = { 
     loading: true,
@@ -7,13 +7,13 @@ const INITIAL_STATE = {
     refreshing: false
 };
 export default (state = INITIAL_STATE, action) => {
-    console.log(action);
+    
     switch (action.type) {
-        case FEATURES_FETCH_SUCCESS:            
+        case MENU_FETCH_SUCCESS:            
             return { ...state, data: action.payload, loading: false, refreshing: false };
-        case FEATURES_FETCHING:
+        case MENU_FETCHING:
             return { ...state, loading: true, refreshing: true };
-        case FEATURES_FETCH_ERROR:
+        case MENU_FETCH_ERROR:
             return { ...state, loading: false, error: 'Something went wrong!!!', refreshing: false };
         default:
             return state;

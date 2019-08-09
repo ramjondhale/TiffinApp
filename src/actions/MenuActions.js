@@ -1,11 +1,11 @@
 import RNSecureStorage from 'rn-secure-storage';
-import { FEATURES_FETCH_SUCCESS, FEATURES_FETCH_ERROR, FEATURES_FETCHING } from './types';
+import { MENU_FETCH_SUCCESS, MENU_FETCH_ERROR, MENU_FETCHING } from './types';
 
-export const featuresFetch = () => {
+export const menuFetch = () => {
     let token;
     
     return (dispatch) => {   
-        dispatch({ type: FEATURES_FETCHING });
+        dispatch({ type: MENU_FETCHING });
         RNSecureStorage.get('token').then((val) => {
             token ='Bearer '+val;
             fetch('http://192.168.43.174/TiffinAppApi/', {
@@ -16,7 +16,7 @@ export const featuresFetch = () => {
                 'Authorization': token
             },
             body: JSON.stringify({
-                name: 'getAllFeatures',
+                name: 'getMenu',
                 param: {
                 
                 }
@@ -25,14 +25,14 @@ export const featuresFetch = () => {
             }).then((response) => response.json())
             .then((data) => {  
                     if (data.response.result) {
-                        dispatch({ type: FEATURES_FETCH_SUCCESS, payload: data.response.result });
+                        dispatch({ type: MENU_FETCH_SUCCESS, payload: data.response.result });
                     } else {
-                        dispatch({ type: FEATURES_FETCH_ERROR });
+                        dispatch({ type: MENU_FETCH_ERROR });
                     }  
                 }                      
             )
             .catch(() => {
-                dispatch({ type: FEATURES_FETCH_ERROR });
+                dispatch({ type: MENU_FETCH_ERROR });
             });
       }).catch((err) => {
         alert(err);

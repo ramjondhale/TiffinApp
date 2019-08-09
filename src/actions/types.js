@@ -12,3 +12,8 @@ export const SIGN_UP_SUCCESS = 'sign_up_success';
 
 export const FEATURES_FETCH_SUCCESS = 'features_fetch_success';
 export const FEATURES_FETCH_ERROR = 'features_fetch_error';
+export const FEATURES_FETCHING = 'features_fetching';
+
+export const MENU_FETCH_SUCCESS = 'menu_fetch_success';
+export const MENU_FETCH_ERROR = 'menu_fetch_error';
+export const MENU_FETCHING = 'menu_fetching';

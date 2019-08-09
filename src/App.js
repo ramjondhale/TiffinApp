@@ -22,7 +22,7 @@ const theme = {
   
 
   const persistConfig = {
-    key: 'root',
+    key: 'root3',
     storage: AsyncStorage
   };
 

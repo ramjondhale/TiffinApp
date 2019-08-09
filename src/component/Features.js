@@ -9,44 +9,41 @@ class Features extends Component {
         this.props.featuresFetch();          
     }
     
-    renderList() {
-        if (this.props.loading) {
-            return (
-            <View>
-             <ActivityIndicator animating />;
-            </View>
-            ); 
-        } 
-       return (        
-            <List.Section >
-            <FlatList 
-                data={this.props.data}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) =>
-                (<List.Item
-                        title={item.feature}                            
-                        left={props => <List.Icon {...props} icon="star" color={Colors.purpleA400} />}
-                    />)}
-
-            />
-            </List.Section>
-        
-       ); 
-    }
+    // renderList() {
+    //     if (this.props.loading) {
+    //         return (
+    //         <View>
+    //          <ActivityIndicator animating />;
+    //         </View>
+    //         ); 
+    //     } 
+       
+    // }
     
        
-    render() {     
-        console.log(this.props.data);
-              
+    render() {                
              return (
                <ScrollView>
-                   {this.renderList()}
+                <List.Section >
+                    <FlatList 
+                        data={this.props.data}
+                        keyExtractor={item => item.id}
+                        //refreshing={this.props.refreshing}
+                        //onRefresh={this.props.featuresFetch()}
+                        renderItem={({ item }) =>
+                        (<List.Item
+                                title={item.feature}                            
+                                left={props => <List.Icon {...props} icon="star" color={Colors.purpleA400} />}
+                        />)}
+
+                    />
+                </List.Section>
                </ScrollView>
             );
     }
 }
 const mapStateToProps = ({ features }) => {
-    const { data, loading, error } = features;
-    return { data, loading, error };
+    const { data, loading, error, refreshing } = features;
+    return { data, loading, error, refreshing };
 };
 export default connect(mapStateToProps, { featuresFetch })(Features);
