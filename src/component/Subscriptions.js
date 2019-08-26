@@ -1,29 +1,46 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, FlatList } from 'react-native';
+import { connect } from 'react-redux';
 import { Avatar, Button, Card, Title, Paragraph, Colors } from 'react-native-paper';
+import { subscriptionsFetch } from '../actions';
 
 
 class Subscriptions extends Component {
+    componentDidMount() {
+        this.props.subscriptionsFetch();          
+    }
     render() {
         return (
             <ScrollView>
-            <Card elevation={5}>
-                <Card.Title title="Monthly" left={(props) => <Avatar.Icon {...props} icon="event" />} />
-                <Card.Cover source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDavx0UPgISJl_mnM1AhCLQlrd8Gc9EbQARRSU16Bbyheb55XAsA' }} />
-                <Card.Content>
-                <Title style={{ color: Colors.purple800 }}>Monthly One Time {'\u20B9'}1300 Subscribed</Title>
-                <Paragraph>30 Tiffins in Month Only at Rs.1300
-                you can skip tiffin in between, 
-                that tiffin will remain in your account.</Paragraph>
-                </Card.Content>                    
-                <Card.Actions>
-                <Button mode="contained">Skip Tiffin</Button>   
-                <Title style={{ color: Colors.pinkA200 }}>  Remaining Tiffin:15</Title>                
-                </Card.Actions>
-            </Card>
+                <FlatList 
+                    data={this.props.data}
+                    keyExtractor={item => item.id}
+                    //refreshing={this.props.refreshing}
+                    //onRefresh={this.props.featuresFetch()}
+                    renderItem={({ item }) =>
+                    (
+                        <Card elevation={5}>
+                            <Card.Title title={item.type} left={(props) => <Avatar.Icon {...props} icon="event" />} />
+                            <Card.Cover source={{ uri: item.thumbnail }} />
+                            <Card.Content>
+                            <Title style={{ color: Colors.purple800 }}>{item.title} {'\u20B9'}{item.price} Subscribed</Title>
+                            <Paragraph>{item.description}</Paragraph>
+                            </Card.Content>                    
+                            <Card.Actions>
+                            <Button mode="contained">Skip Tiffin</Button>   
+                            <Title style={{ color: Colors.pinkA200 }}>  Remaining Tiffin:{item.remaining_tiffin}</Title>                
+                            </Card.Actions>
+                        </Card>
+                    )}
+                />        
             </ScrollView>
         );
     }
 }
 
-export default Subscriptions;
+const mapStateToProps = ({ subscribedPlans }) => {
+    const { data, loading, error, refreshing } = subscribedPlans;
+    return { data, loading, error, refreshing };
+};
+
+export default connect(mapStateToProps, { subscriptionsFetch })(Subscriptions);

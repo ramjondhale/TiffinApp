@@ -1,40 +1,47 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph, Colors } from 'react-native-paper';
+import { ScrollView, FlatList } from 'react-native';
+import { connect } from 'react-redux';
+import { Avatar, Button, Card, Title, Paragraph, Colors, List} from 'react-native-paper';
+import { subscriptionPlanFetch } from '../actions';
 
 
 class SubscriptionPlans extends Component {
+    componentDidMount() {
+        this.props.subscriptionPlanFetch();          
+    }
     render() {
         return (
             <ScrollView>
-                <Card elevation={5}>
-                    <Card.Title title="Monthly" left={(props) => <Avatar.Icon {...props} icon="event" />} />
-                    <Card.Cover source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDavx0UPgISJl_mnM1AhCLQlrd8Gc9EbQARRSU16Bbyheb55XAsA' }} />
-                    <Card.Content>
-                    <Title>Monthly One Time {'\u20B9'}1300</Title>
-                    <Paragraph>30 Tiffins in Month Only at Rs.1300
-                    you can skip tiffin in between, 
-                    that tiffin will remain in your account.</Paragraph>
-                    </Card.Content>                    
-                    <Card.Actions>
-                    <Button mode="contained">Subscribe</Button>                   
-                    </Card.Actions>
-                </Card>
-                <Card>
-                    <Card.Title title="Monthly" left={(props) => <Avatar.Icon {...props} icon="event" />} />
-                    <Card.Cover source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDavx0UPgISJl_mnM1AhCLQlrd8Gc9EbQARRSU16Bbyheb55XAsA' }} />
-                    <Card.Content>
-                    <Title>Monthly Two Time {'\u20B9'}2500</Title>
-                    <Paragraph>60 Tiffins in Month Only at Rs.2500
-                    you can skip tiffin in between, 
-                    that tiffin will remain in your account.</Paragraph>
-                    </Card.Content>                    
-                    <Card.Actions>
-                    <Button mode="contained">Subscribe</Button>                   
-                    </Card.Actions>
-                </Card>
+             
+                <FlatList 
+                    data={this.props.data}
+                    keyExtractor={item => item.id}
+                    //refreshing={this.props.refreshing}
+                    //onRefresh={this.props.featuresFetch()}
+                    renderItem={({ item }) =>
+                    (
+                        <Card elevation={5}>
+                            <Card.Title title={item.type} left={(props) => <Avatar.Icon {...props} icon="event" />} />
+                            <Card.Cover source={{ uri: item.thumbnail }} />
+                            <Card.Content>
+                            <Title>{item.title} {'\u20B9'}{item.price}</Title>
+                            <Paragraph>{item.description}</Paragraph>
+                            </Card.Content>                    
+                            <Card.Actions>
+                            <Button mode="contained">Subscribe</Button>                   
+                            </Card.Actions>
+                        </Card>
+                    )}
+
+                />        
+               
+             
             </ScrollView>
         );
     }
 }
-export default SubscriptionPlans;
+const mapStateToProps = ({ subscriptionPlan }) => {
+    const { data, loading, error, refreshing } = subscriptionPlan;
+    return { data, loading, error, refreshing };
+};
+export default connect(mapStateToProps, { subscriptionPlanFetch })(SubscriptionPlans);

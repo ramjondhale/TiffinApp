@@ -17,3 +17,11 @@ export const FEATURES_FETCHING = 'features_fetching';
 export const MENU_FETCH_SUCCESS = 'menu_fetch_success';
 export const MENU_FETCH_ERROR = 'menu_fetch_error';
 export const MENU_FETCHING = 'menu_fetching';
+
+export const SUBSCRIPTION_FETCH_SUCCESS = 'subscription_fetch_success';
+export const SUBSCTIPTION_FETCH_ERROR = 'subscription_fetch_error';
+export const SUBSCRIPTION_FETCHING = 'subscription_fetching';
+
+export const SUBSCRIPTION_PLAN_FETCH_SUCCESS = 'subscription_plan_fetch_success';
+export const SUBSCTIPTION_PLAN_FETCH_ERROR = 'subscription_plan_fetch_error';
+export const SUBSCRIPTION_PLAN_FETCHING = 'subscription_plan_fetching';
