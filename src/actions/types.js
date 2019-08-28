@@ -25,3 +25,10 @@ export const SUBSCRIPTION_FETCHING = 'subscription_fetching';
 export const SUBSCRIPTION_PLAN_FETCH_SUCCESS = 'subscription_plan_fetch_success';
 export const SUBSCTIPTION_PLAN_FETCH_ERROR = 'subscription_plan_fetch_error';
 export const SUBSCRIPTION_PLAN_FETCHING = 'subscription_plan_fetching';
+export const SUBSCRIBE_PLAN = 'subscribe_paln';
+export const SUBSCRIBE_PLAN_ERROR = 'subscribe_plan_error';
+export const CURRENT_ORDER_FETCHING = 'current_order_fetching';
+export const CURRENT_ORDER_SUCCESS = 'current_order_success';
+export const CURRENT_ORDER_ERROR = 'current_order_error';
+export const HIDE_DIALOG = 'hide_dialog';
+

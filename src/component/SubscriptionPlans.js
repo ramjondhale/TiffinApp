@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
-import { ScrollView, FlatList } from 'react-native';
+import { ScrollView, FlatList, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Avatar, Button, Card, Title, Paragraph, Colors, List} from 'react-native-paper';
-import { subscriptionPlanFetch } from '../actions';
+import { Avatar, Button, Card, Title, Paragraph, Colors, List, Dialog, Portal } from 'react-native-paper';
+import { subscriptionPlanFetch, subscribePlan, hideDialog } from '../actions';
 
 
 class SubscriptionPlans extends Component {
     componentDidMount() {
         this.props.subscriptionPlanFetch();          
     }
+    onSubscribe(id, tiffin) {    
+        this.props.subscribePlan({ id, tiffin });
+    }
+    onHide() {
+        this.props.hideDialog();        
+    }   
+      
     render() {
         return (
+            
             <ScrollView>
              
                 <FlatList 
                     data={this.props.data}
-                    keyExtractor={item => item.id}
+                    keyExtractor={(item) => item.id}
                     //refreshing={this.props.refreshing}
                     //onRefresh={this.props.featuresFetch()}
                     renderItem={({ item }) =>
@@ -28,12 +36,28 @@ class SubscriptionPlans extends Component {
                             <Paragraph>{item.description}</Paragraph>
                             </Card.Content>                    
                             <Card.Actions>
-                            <Button mode="contained">Subscribe</Button>                   
+                            <Button mode="contained" onPress={() => this.onSubscribe(item.id, item.total_tiffin)}>Subscribe</Button>                   
                             </Card.Actions>
                         </Card>
                     )}
 
-                />        
+                /> 
+                <View>
+                
+                    <Portal>
+                    <Dialog
+                        visible={this.props.visible}
+                        onDismiss={this.onHide.bind(this)} >
+                        <Dialog.Title>Alert</Dialog.Title>
+                        <Dialog.Content>
+                        <Paragraph>{this.props.dialogMessage}</Paragraph>
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                        <Button onPress={this.onHide.bind(this)}>Done</Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                    </Portal>
+                </View>       
                
              
             </ScrollView>
@@ -41,7 +65,7 @@ class SubscriptionPlans extends Component {
     }
 }
 const mapStateToProps = ({ subscriptionPlan }) => {
-    const { data, loading, error, refreshing } = subscriptionPlan;
-    return { data, loading, error, refreshing };
+    const { data, loading, error, refreshing, visible, dialogMessage } = subscriptionPlan;
+    return { data, loading, error, refreshing, visible, dialogMessage };
 };
-export default connect(mapStateToProps, { subscriptionPlanFetch })(SubscriptionPlans);
+export default connect(mapStateToProps, { subscriptionPlanFetch, subscribePlan, hideDialog })(SubscriptionPlans);

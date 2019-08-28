@@ -31,6 +31,7 @@
 		874FDF027B0A42CE917DAD85 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8F334FDCE344F52A21CBFDA /* Octicons.ttf */; };
 		0FDF14F005E24CD8810A89AD /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E204532991409E9035756D /* SimpleLineIcons.ttf */; };
 		4AA79081FEA047968ECEA8BE /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6842E31775414F22AAAB51A2 /* Zocial.ttf */; };
+		7F3B7E1D225341BCB62D4C0C /* libRazorpayCheckout.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ED75FAEAAE45CEB32B9E6F /* libRazorpayCheckout.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		F8F334FDCE344F52A21CBFDA /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		92E204532991409E9035756D /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		6842E31775414F22AAAB51A2 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2E3917A46B4A4222846E62DF /* RazorpayCheckout.xcodeproj */ = {isa = PBXFileReference; name = "RazorpayCheckout.xcodeproj"; path = "../node_modules/react-native-razorpay/ios/RazorpayCheckout.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		04ED75FAEAAE45CEB32B9E6F /* libRazorpayCheckout.a */ = {isa = PBXFileReference; name = "libRazorpayCheckout.a"; path = "libRazorpayCheckout.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F3B7E1D225341BCB62D4C0C /* libRazorpayCheckout.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +163,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2E3917A46B4A4222846E62DF /* RazorpayCheckout.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -536,6 +541,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TiffinApp.app/TiffinApp";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-razorpay\ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -555,6 +568,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TiffinApp.app/TiffinApp";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-razorpay\ios/**",
+				);
 			};
 			name = Release;
 		};
@@ -574,6 +595,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = TiffinApp;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-razorpay\ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -592,6 +617,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = TiffinApp;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-razorpay\ios/**",
+				);
 			};
 			name = Release;
 		};
@@ -619,6 +648,14 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-razorpay\ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -646,6 +683,14 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-razorpay\ios/**",
+				);
 			};
 			name = Release;
 		};
@@ -672,6 +717,14 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TiffinApp-tvOS.app/TiffinApp-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-razorpay\ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -698,6 +751,14 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TiffinApp-tvOS.app/TiffinApp-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-razorpay\ios/**",
+				);
 			};
 			name = Release;
 		};
