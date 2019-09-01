@@ -1,4 +1,4 @@
-import { MENU_FETCH_SUCCESS, MENU_FETCH_ERROR, MENU_FETCHING } from '../actions/types';
+import { ORDER_DETAILS_FETCH_SUCCESS, ORDER_DETAILS_FETCHING, ORDER_DETAILS_FETCH_ERROR } from '../actions/types';
 
 const INITIAL_STATE = { 
     loading: true,
@@ -6,13 +6,13 @@ const INITIAL_STATE = {
     data: null,
     refreshing: false
 };
-export default (state = INITIAL_STATE, action) => {    
+export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case MENU_FETCH_SUCCESS:            
+        case ORDER_DETAILS_FETCH_SUCCESS:            
             return { ...state, data: action.payload, loading: false, refreshing: false };
-        case MENU_FETCHING:
+        case ORDER_DETAILS_FETCHING:
             return { ...state, loading: true, refreshing: true };
-        case MENU_FETCH_ERROR:
+        case ORDER_DETAILS_FETCH_ERROR:
             return { ...state, loading: false, error: 'Something went wrong!!!', refreshing: false };
         default:
             return state;

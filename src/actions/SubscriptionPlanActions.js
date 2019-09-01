@@ -1,7 +1,7 @@
 import RNSecureStorage from 'rn-secure-storage';
 import RazorpayCheckout from 'react-native-razorpay';
 import { SUBSCRIPTION_PLAN_FETCHING, SUBSCRIPTION_PLAN_FETCH_SUCCESS, SUBSCRIPTION_PLAN_FETCH_ERROR,
-     SUBSCRIBE_PLAN, SUBSCRIBE_PLAN_ERROR, CURRENT_ORDER_ERROR,
+      SUBSCRIBE_PLAN_ERROR, CURRENT_ORDER_ERROR,
      CURRENT_ORDER_FETCHING, CURRENT_ORDER_SUCCESS, HIDE_DIALOG } from './types';
 import { subscriptionsFetch } from './SubscriptionsActions';
 
@@ -15,8 +15,7 @@ export const subscriptionPlanFetch = () => {
             token ='Bearer '+val;
             fetch('http://192.168.43.174/TiffinAppApi/', {
             method: 'POST',
-            headers: {    
-                          
+            headers: {                           
                 'Content-Type': 'application/json',
                 'Authorization': token
             },
@@ -76,14 +75,12 @@ export const subscribePlan = ({ id, tiffin }) => {
                             description: 'Eat Good Feel Good',
                             //image: require('./assets/Dreammeal.png'),
                             currency: 'INR',
-                            key: 'rzp_live_yo0KLGcHBcRiqU',
-                            amount: (data.response.result[0].price * 100),                            
+                            key: 'rzp_test_DzOKLdgTT1tPAN',
+                            amount: (data.response.result[0].price * 100),  
+                            //order_id: data.response.result[0].id,
+                            //notes: data.response.result[0].subscription_id,               
                             name: 'DreamMeal',
-                            prefill: {
-                              email: 'ramjondhale1@gmail.com',
-                              contact: '8668872541',
-                              name: 'DreamMeal'
-                            },
+                           
                             theme: { color: '#528FF0' }
                           };
                           RazorpayCheckout.open(options).then((data1) => {   
@@ -91,8 +88,7 @@ export const subscribePlan = ({ id, tiffin }) => {
                            
                                 fetch('http://192.168.43.174/TiffinAppApi/', {
                                 method: 'POST',
-                                headers: {    
-                                              
+                                headers: {                                                 
                                     'Content-Type': 'application/json',
                                     'Authorization': token
                                 },
@@ -107,10 +103,32 @@ export const subscribePlan = ({ id, tiffin }) => {
                                 })         
                                
                                 }).then((response) => response.json())
-                                .then((data2) => {                                          
-                                            dispatch({ type: CURRENT_ORDER_SUCCESS });                                      
-                                    }                      
-                                )
+                                .then((data2) => { 
+                                       fetch('http://192.168.43.174/TiffinAppApi/', {
+                                method: 'POST',
+                                headers: {    
+                                              
+                                    'Content-Type': 'application/json',
+                                    'Authorization': token
+                                },
+                                body: JSON.stringify({
+                                    name: 'addOrder',
+                                    param: {
+                                        subscription_id: data.response.result[0].id,
+                                        start_date: data.response.result[0].start_date,
+                                        remaining_tiffin: data.response.result[0].remaining_tiffin,
+                                        tiffin_time: data.response.result[0].tiffin_time                                    
+                                    }
+                                })         
+                               
+                                }).then((response) => response.json())
+                                .then((data3) => {                                         
+                                        dispatch({ type: CURRENT_ORDER_SUCCESS });                                      
+                                })
+                                .catch(() => {
+                                    dispatch({ type: CURRENT_ORDER_ERROR });
+                                });                                     
+                                })
                                 .catch(() => {
                                     dispatch({ type: CURRENT_ORDER_ERROR });
                                 });
@@ -119,7 +137,7 @@ export const subscribePlan = ({ id, tiffin }) => {
                             //alert(`Success: ${data1.razorpay_payment_id}`);
                           }).catch((error) => {
                             // handle failure
-                            dispatch({ type: CURRENT_ORDER_FETCHING });
+                           
                            
                             fetch('http://192.168.43.174/TiffinAppApi/', {
                             method: 'POST',
@@ -133,13 +151,13 @@ export const subscribePlan = ({ id, tiffin }) => {
                                 param: {
                                     id: data.response.result[0].id,
                                     status: 'failed',
-                                    payment_id: 'null'
+                                    payment_id: 'NULL'
                                 
                                 }
                             })         
                            
                             }).then((response) => response.json())
-                            .then((data2) => {                                          
+                            .then((data4) => {                                          
                                 dispatch({ type: CURRENT_ORDER_ERROR });                                      
                                 }                      
                             )
@@ -147,7 +165,7 @@ export const subscribePlan = ({ id, tiffin }) => {
                                 dispatch({ type: CURRENT_ORDER_ERROR });
                             });
                             dispatch({ type: CURRENT_ORDER_ERROR });
-                            //alert(`Error: ${error.code} | ${error.description}`);
+                            alert(`Error: ${error.code} | ${error.description}`);
                         });
                         //console.log(data.response.result[0]);
                     } else {

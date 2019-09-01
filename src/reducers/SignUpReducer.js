@@ -7,7 +7,10 @@ const INITIAL_STATE = {
     email: '',
     password: '',
     cpassword: '',
-    paddress: '',
+    flatno: '',
+    landmark: '',
+    building: '',
+    area: '',
     loading: false,
     message: ''     
 };

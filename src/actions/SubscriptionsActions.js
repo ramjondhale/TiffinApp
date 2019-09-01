@@ -1,5 +1,6 @@
 import RNSecureStorage from 'rn-secure-storage';
-import { SUBSCRIPTION_FETCHING, SUBSCRIPTION_FETCH_SUCCESS, SUBSCRIPTION_FETCH_ERROR } from './types';
+import { SUBSCRIPTION_FETCHING, SUBSCRIPTION_FETCH_SUCCESS, SUBSCRIPTION_FETCH_ERROR,
+       SKIP_DATE_CHANGE, SKIP_TIFFIN, SKIP_TIFFIN_SUCCESS, SKIP_TIFFIN_ERROR } from './types';
 
 
 export const subscriptionsFetch = () => {
@@ -41,5 +42,48 @@ export const subscriptionsFetch = () => {
     };
 };
 
+export const skipTiffin = ({ id, skip }) => {
+    let token;
+    
+    return (dispatch) => {   
+        dispatch({ type: SKIP_TIFFIN });
+        RNSecureStorage.get('token').then((val) => {
+            token ='Bearer '+val;
+            fetch('http://192.168.43.174/TiffinAppApi/', {
+            method: 'POST',
+            headers: {    
+                          
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify({
+                name: 'updateOrderDates',
+                param: {
+                    subscription_id: id,
+		            order_date: skip
+                }
+            })         
+           
+            }).then((response) => response.json())
+            .then((data) => {                     
+                    dispatch({ type: SKIP_TIFFIN_SUCCESS });                 
+                }                      
+            )
+            .catch(() => {
+                dispatch({ type: SKIP_TIFFIN_ERROR });
+            });
+      }).catch((err) => {
+        alert(err);
+      });   
+    };
+};
 
 
+
+export const skipDateChange = (text) => {
+    return (dispatch) => {         
+        dispatch({ type: SKIP_DATE_CHANGE,
+            payload: text });  
+        dispatch(subscriptionsFetch());   
+     };      
+};

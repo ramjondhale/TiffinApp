@@ -9,7 +9,7 @@ export const formUpdate = ({ prop, value }) => {
         payload: { prop, value }
     };
 };
-export const createAccount = ({ fname, lname, mobile, email, password, paddress }) => {
+export const createAccount = ({ fname, lname, mobile, email, password, flatno, landmark, building, area }) => {
     return (dispatch) => {
         dispatch({ type: SIGN_UP });
         fetch('http://192.168.43.174/TiffinAppApi/', {
@@ -26,7 +26,10 @@ export const createAccount = ({ fname, lname, mobile, email, password, paddress 
                     mobile,
                     email,
                     password,
-                    paddress
+                    flatno,
+                    landmark,
+                    building,
+                    area
                 }
             })         
            

@@ -19,8 +19,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, loading: true, refreshing: true };
         case SUBSCRIPTION_PLAN_FETCH_ERROR:
             return { ...state, loading: false, error: 'Something went wrong!!!', refreshing: false };
-        case SUBSCRIBE_PLAN:
-            return { ...state };
+        
         case SUBSCRIBE_PLAN_ERROR:
             return { ...state };
         case HIDE_DIALOG:

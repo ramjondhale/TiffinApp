@@ -1,16 +1,18 @@
 import RNSecureStorage, { ACCESSIBLE } from 'rn-secure-storage';
 import { Actions } from 'react-native-router-flux';
-import { EMAIL_CHANGED, 
+import { MOBILE_CHANGED, 
     PASSWORD_CHANGED, 
     LOGIN_USER_SUCCESS, 
     LOGIN_USER_FAILED, 
     LOGIN_ERROR, 
-    LOGIN_USER 
+    LOGIN_USER,
+    LOGOUT_USER
 } from './types';
 
-export const emailChanged = (text) => {
+
+export const mobileChanged = (text) => {
     return {
-        type: EMAIL_CHANGED,
+        type: MOBILE_CHANGED,
         payload: text
     };    
 };
@@ -20,7 +22,7 @@ export const passwordChanged = (text) => {
         payload: text
     };    
 };
-export const loginUser = ({ email, password }) => {
+export const loginUser = ({ mobile, password }) => {
     return (dispatch) => {
         dispatch({ type: LOGIN_USER });
         fetch('http://192.168.43.174/TiffinAppApi/', {
@@ -32,7 +34,7 @@ export const loginUser = ({ email, password }) => {
             body: JSON.stringify({
                 name: 'generateToken',
                 param: {
-                     email,
+                     mobile,
                      password
                 }
             })         
@@ -57,7 +59,12 @@ export const loginUser = ({ email, password }) => {
             });
     };
 };
-
+export const custLogout = () => {
+    return (dispatch) => {
+       dispatch({ type: LOGOUT_USER }); 
+       Actions.auth();      
+    };    
+};
 // export const getToken = () => {
 //     return () => {
 //         RNSecureStorage.get('token').then((val) => {

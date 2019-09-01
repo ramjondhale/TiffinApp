@@ -5,6 +5,12 @@ import { connect } from 'react-redux';
 import { menuFetch } from '../actions';
 
 class Menu extends Component {
+    constructor(props) {
+        super(props);
+        //set value in state for initial date
+        this.state = { date: '2018-05-01' };
+      }
+    
     componentDidMount() {
         this.props.menuFetch();          
     }
@@ -46,6 +52,8 @@ class Menu extends Component {
 
                     />                
                 </List.Section>
+                
+                
             </ScrollView>
 
             

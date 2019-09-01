@@ -5,27 +5,27 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Card, Button, TextInput, ActivityIndicator 
 } from 'react-native-paper';
-import { emailChanged, passwordChanged, loginUser, getToken } from '../actions';
+import { mobileChanged, passwordChanged, loginUser, getToken } from '../actions';
 
 
 class LoginForm extends Component {   
-    // componentDidMount() {
-    //     RNSecureStorage.get('token').then((val) => {
-    //                    Actions.home();
-    //                    }).catch((err) => {
-    //                      alert(err);
-    //                    }); 
-    // } 
+   componentDidMount() {
+    const { mobile, password } = this.props;
+    if (mobile !== '') {
+        this.props.loginUser({ mobile, password });
+    }
+    
+   }
 
-    onEmailChange(text) {
-        this.props.emailChanged(text);
+    onMobileChange(text) {
+        this.props.mobileChanged(text);
     }
     onPasswordChange(text) {
         this.props.passwordChanged(text);
     }
     onButtonPress() {
-        const { email, password } = this.props;
-        this.props.loginUser({ email, password });
+        const { mobile, password } = this.props;
+        this.props.loginUser({ mobile, password });
     }
     
 
@@ -45,17 +45,17 @@ class LoginForm extends Component {
         }
     }
 
-    renderMessage() {
-        if (this.props.login) {
-            return (
-                <View style={{ backgroundColor: 'white' }}>
-                    <Text style={styles.messageStyle}>
-                    Login Successful.                   
-                    </Text>
-                </View>
-            );
-        }
-    }
+    // renderMessage() {
+    //     if (this.props.login) {
+    //         return (
+    //             <View style={{ backgroundColor: 'white' }}>
+    //                 <Text style={styles.messageStyle}>
+    //                 Login Successful.                   
+    //                 </Text>
+    //             </View>
+    //         );
+    //     }
+    // }
 
     renderButton() {
         if (this.props.loading) {
@@ -82,10 +82,10 @@ class LoginForm extends Component {
         <Card>
             <Card.Content>
             <TextInput
-             label='Email'     
-             onChangeText={this.onEmailChange.bind(this)} 
+             label='Mobile'     
+             onChangeText={this.onMobileChange.bind(this)} 
              style={styles.textInputStyle}   
-             value={this.props.email}        
+             value={this.props.mobile}        
             />           
 
             </Card.Content>
@@ -99,7 +99,7 @@ class LoginForm extends Component {
             />            
             </Card.Content>
             {this.renderError()}
-            {this.renderMessage()}
+            {/* {this.renderMessage()} */}
             <Card.Content>
            
             {this.renderButton()}
@@ -151,9 +151,9 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-    const { email, password, error, loading, login } = auth;
-    return { email, password, error, loading, login };
+    const { mobile, password, error, loading, login } = auth;
+    return { mobile, password, error, loading, login };
     };
 export default connect(mapStateToProps,
-     { emailChanged, passwordChanged, loginUser, getToken }
+     { mobileChanged, passwordChanged, loginUser, getToken }
      )(LoginForm);

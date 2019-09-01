@@ -7,8 +7,8 @@ import { formUpdate, createAccount } from '../actions/SignUpActions';
 
 class SignUp extends Component {
     onButtonPress() {
-        const { fname, lname, mobile, email, password, paddress } = this.props;
-        this.props.createAccount({ fname, lname, mobile, email, password, paddress });
+        const { fname, lname, mobile, email, password, flatno, landmark, building, area } = this.props;
+        this.props.createAccount({ fname, lname, mobile, email, password, flatno, landmark, building, area });
     }
 
     renderMessage() {
@@ -86,23 +86,33 @@ class SignUp extends Component {
                 style={styles.textInputStyle}   
                 value={this.props.password}        
                 />  
-                </Card.Content>
+                </Card.Content>            
 
                 <Card.Content>
+                <Text style={{fontSize: 17, marginLeft: 10 }}>Deatail Address</Text>
                 <TextInput
-                label='Confirm Password'     
-                onChangeText={value => this.props.formUpdate({ prop: 'cpassword', value })} 
+                label='Apt,Flat or floor number'     
+                onChangeText={value => this.props.formUpdate({ prop: 'flatno', value })} 
                 style={styles.textInputStyle}   
-                value={this.props.cpassword}        
+                value={this.props.flatno}        
                 />  
-                </Card.Content>
-
-                <Card.Content>
-                <TextInput
-                label='Permanent Address'     
-                onChangeText={value => this.props.formUpdate({ prop: 'paddress', value })} 
+                <TextInput 
+                label='Landmark'     
+                onChangeText={value => this.props.formUpdate({ prop: 'landmark', value })} 
                 style={styles.textInputStyle}   
-                value={this.props.paddress}        
+                value={this.props.landmark}        
+                />  
+                <TextInput
+                label='Building Name'     
+                onChangeText={value => this.props.formUpdate({ prop: 'building', value })} 
+                style={styles.textInputStyle}   
+                value={this.props.building}        
+                />  
+                <TextInput
+                label='Area Name'     
+                onChangeText={value => this.props.formUpdate({ prop: 'area', value })} 
+                style={styles.textInputStyle}   
+                value={this.props.area}        
                 />  
                 </Card.Content>
                 <Card.Content>
@@ -150,8 +160,8 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const { fname, lname, mobile, email, password, cpassword, paddress, loading, message } = state.signUp;
-    return { fname, lname, mobile, email, password, cpassword, paddress, loading, message };
+    const { fname, lname, mobile, email, password, cpassword, flatno, landmark, building, area, loading, message } = state.signUp;
+    return { fname, lname, mobile, email, password, cpassword, flatno, landmark, building, area, loading, message };
 };
 
 export default connect(mapStateToProps, { formUpdate, createAccount })(SignUp);
