@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Colors } from 'react-native-paper';
 import { accountDetailsFetch, custLogout } from '../actions';
 
+
 class Account extends Component {
     componentDidMount() {
         this.props.accountDetailsFetch();          
@@ -17,12 +18,14 @@ class Account extends Component {
     
     
     render() {
-        const { fname, lname, mobile, email } = this.props.data;
+       const { fname, lname, mobile, email } = this.props.data;
+       
         return (
             <ScrollView>
             
             <View style={styles.container}>
-            <Text style={styles.key}>Name: </Text><Text style={styles.value}>{fname} {lname}{'\n'}</Text>
+            
+            <Text style={styles.key}>Name: </Text><Text style={styles.value}>{fname} {lname} {'\n'}</Text>
             <View style={styles.hairline} />
             <Text style={styles.key}>Mobile: </Text><Text style={styles.value}>{mobile}{'\n'}</Text>
             <View style={styles.hairline} />

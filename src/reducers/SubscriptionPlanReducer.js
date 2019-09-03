@@ -11,7 +11,7 @@ const INITIAL_STATE = {
     dialogMessage: ''
 };
 export default (state = INITIAL_STATE, action) => {
-    console.log(action);
+    
     switch (action.type) {
         case SUBSCRIPTION_PLAN_FETCH_SUCCESS:            
             return { ...state, data: action.payload, loading: false, refreshing: false };

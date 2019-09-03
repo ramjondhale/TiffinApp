@@ -13,7 +13,7 @@ export const subscriptionPlanFetch = () => {
         dispatch({ type: SUBSCRIPTION_PLAN_FETCHING });
         RNSecureStorage.get('token').then((val) => {
             token ='Bearer '+val;
-            fetch('http://192.168.43.174/TiffinAppApi/', {
+            fetch('https://www.dream-meal.com/api/', {
             method: 'POST',
             headers: {                           
                 'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export const subscribePlan = ({ id, tiffin }) => {
         dispatch({ type: SUBSCRIPTION_PLAN_FETCHING });
         RNSecureStorage.get('token').then((val) => {
             token ='Bearer '+val;
-            fetch('http://192.168.43.174/TiffinAppApi/', {
+            fetch('https://www.dream-meal.com/api/', {
             method: 'POST',
             headers: {    
                           
@@ -75,7 +75,7 @@ export const subscribePlan = ({ id, tiffin }) => {
                             description: 'Eat Good Feel Good',
                             //image: require('./assets/Dreammeal.png'),
                             currency: 'INR',
-                            key: 'rzp_test_DzOKLdgTT1tPAN',
+                            key: 'rzp_live_yo0KLGcHBcRiqU',
                             amount: (data.response.result[0].price * 100),  
                             //order_id: data.response.result[0].id,
                             //notes: data.response.result[0].subscription_id,               
@@ -86,7 +86,7 @@ export const subscribePlan = ({ id, tiffin }) => {
                           RazorpayCheckout.open(options).then((data1) => {   
                             dispatch({ type: CURRENT_ORDER_FETCHING });
                            
-                                fetch('http://192.168.43.174/TiffinAppApi/', {
+                                fetch('https://www.dream-meal.com/api/', {
                                 method: 'POST',
                                 headers: {                                                 
                                     'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ export const subscribePlan = ({ id, tiffin }) => {
                                
                                 }).then((response) => response.json())
                                 .then((data2) => { 
-                                       fetch('http://192.168.43.174/TiffinAppApi/', {
+                                       fetch('https://www.dream-meal.com/api/', {
                                 method: 'POST',
                                 headers: {    
                                               
@@ -139,7 +139,7 @@ export const subscribePlan = ({ id, tiffin }) => {
                             // handle failure
                            
                            
-                            fetch('http://192.168.43.174/TiffinAppApi/', {
+                            fetch('https://www.dream-meal.com/api/', {
                             method: 'POST',
                             headers: {    
                                           

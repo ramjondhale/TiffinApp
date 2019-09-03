@@ -1,6 +1,6 @@
 import RNSecureStorage from 'rn-secure-storage';
 import { SUBSCRIPTION_FETCHING, SUBSCRIPTION_FETCH_SUCCESS, SUBSCRIPTION_FETCH_ERROR,
-       SKIP_DATE_CHANGE, SKIP_TIFFIN, SKIP_TIFFIN_SUCCESS, SKIP_TIFFIN_ERROR } from './types';
+       SKIP_DATE_CHANGE, SKIP_TIFFIN, SKIP_TIFFIN_SUCCESS, SKIP_TIFFIN_ERROR, HIDE_SKIP_NOTIFICATION } from './types';
 
 
 export const subscriptionsFetch = () => {
@@ -10,7 +10,7 @@ export const subscriptionsFetch = () => {
         dispatch({ type: SUBSCRIPTION_FETCHING });
         RNSecureStorage.get('token').then((val) => {
             token ='Bearer '+val;
-            fetch('http://192.168.43.174/TiffinAppApi/', {
+            fetch('https://www.dream-meal.com/api/', {
             method: 'POST',
             headers: {    
                           
@@ -49,7 +49,7 @@ export const skipTiffin = ({ id, skip }) => {
         dispatch({ type: SKIP_TIFFIN });
         RNSecureStorage.get('token').then((val) => {
             token ='Bearer '+val;
-            fetch('http://192.168.43.174/TiffinAppApi/', {
+            fetch('https://www.dream-meal.com/api/', {
             method: 'POST',
             headers: {    
                           
@@ -66,7 +66,10 @@ export const skipTiffin = ({ id, skip }) => {
            
             }).then((response) => response.json())
             .then((data) => {                     
-                    dispatch({ type: SKIP_TIFFIN_SUCCESS });                 
+                    dispatch({ type: SKIP_TIFFIN_SUCCESS });   
+                    setTimeout(() => {
+                        dispatch({ type: HIDE_SKIP_NOTIFICATION });
+                      }, 5000);              
                 }                      
             )
             .catch(() => {

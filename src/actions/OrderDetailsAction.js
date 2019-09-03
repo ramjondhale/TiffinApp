@@ -9,7 +9,7 @@ export const orderDetailsFetch = () => {
         dispatch({ type: ORDER_DETAILS_FETCHING });
         RNSecureStorage.get('token').then((val) => {
             token ='Bearer '+val;
-            fetch('http://192.168.43.174/TiffinAppApi/', {
+            fetch('https://www.dream-meal.com/api/', {
             method: 'POST',
             headers: {    
                           

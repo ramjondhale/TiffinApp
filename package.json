@@ -1,6 +1,6 @@
 {
-  "name": "TiffinApp",
-  "version": "0.0.1",
+  "name": "DreamMeal",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "react-native start",

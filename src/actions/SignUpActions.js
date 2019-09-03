@@ -12,7 +12,7 @@ export const formUpdate = ({ prop, value }) => {
 export const createAccount = ({ fname, lname, mobile, email, password, flatno, landmark, building, area }) => {
     return (dispatch) => {
         dispatch({ type: SIGN_UP });
-        fetch('http://192.168.43.174/TiffinAppApi/', {
+        fetch('https://www.dream-meal.com/api/', {
             method: 'POST',
             headers: {    
                  Accept: 'application/json',           
@@ -26,7 +26,7 @@ export const createAccount = ({ fname, lname, mobile, email, password, flatno, l
                     mobile,
                     email,
                     password,
-                    flatno,
+                    flat_no: flatno,
                     landmark,
                     building,
                     area

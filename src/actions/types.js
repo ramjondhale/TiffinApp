@@ -28,6 +28,7 @@ export const SKIP_DATE_CHANGE = 'skip_date_change';
 export const SKIP_TIFFIN = 'skip_tiffin';
 export const SKIP_TIFFIN_SUCCESS = 'skip_tiffin_success';
 export const SKIP_TIFFIN_ERROR = 'skip_tiffin_error';
+export const HIDE_SKIP_NOTIFICATION = 'hide_skip_notification';
 
 export const SUBSCRIPTION_PLAN_FETCH_SUCCESS = 'subscription_plan_fetch_success';
 export const SUBSCTIPTION_PLAN_FETCH_ERROR = 'subscription_plan_fetch_error';

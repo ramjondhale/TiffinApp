@@ -7,7 +7,7 @@ const INITIAL_STATE = {
     refreshing: false
 };
 export default (state = INITIAL_STATE, action) => {
-    console.log(action);
+    
     switch (action.type) {
         case ORDER_HISTORY_FETCH_SUCCESS:            
             return { ...state, data: action.payload, loading: false, refreshing: false };

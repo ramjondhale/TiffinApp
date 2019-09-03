@@ -25,7 +25,7 @@ export const passwordChanged = (text) => {
 export const loginUser = ({ mobile, password }) => {
     return (dispatch) => {
         dispatch({ type: LOGIN_USER });
-        fetch('http://192.168.43.174/TiffinAppApi/', {
+        fetch('https://www.dream-meal.com/api/', {
             method: 'POST',
             headers: {    
                  'Accept': 'application/json',           
