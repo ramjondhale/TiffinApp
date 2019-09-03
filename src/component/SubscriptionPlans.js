@@ -48,7 +48,7 @@ class SubscriptionPlans extends Component {
                     <Dialog
                         visible={this.props.visible}
                         onDismiss={this.onHide.bind(this)} >
-                        <Dialog.Title>Alert</Dialog.Title>
+                        <Dialog.Title>Message</Dialog.Title>
                         <Dialog.Content>
                         <Paragraph>{this.props.dialogMessage}</Paragraph>
                         </Dialog.Content>

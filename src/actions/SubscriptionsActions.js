@@ -1,6 +1,6 @@
 import RNSecureStorage from 'rn-secure-storage';
 import { SUBSCRIPTION_FETCHING, SUBSCRIPTION_FETCH_SUCCESS, SUBSCRIPTION_FETCH_ERROR,
-       SKIP_DATE_CHANGE, SKIP_TIFFIN, SKIP_TIFFIN_SUCCESS, SKIP_TIFFIN_ERROR, HIDE_SKIP_NOTIFICATION } from './types';
+       SKIP_DATE_CHANGE, SKIP_TIFFIN, SKIP_TIFFIN_SUCCESS, SKIP_TIFFIN_ERROR } from './types';
 
 
 export const subscriptionsFetch = () => {
@@ -67,9 +67,7 @@ export const skipTiffin = ({ id, skip }) => {
             }).then((response) => response.json())
             .then((data) => {                     
                     dispatch({ type: SKIP_TIFFIN_SUCCESS });   
-                    setTimeout(() => {
-                        dispatch({ type: HIDE_SKIP_NOTIFICATION });
-                      }, 5000);              
+                    alert('Tiffin Skipped Successfuly');            
                 }                      
             )
             .catch(() => {

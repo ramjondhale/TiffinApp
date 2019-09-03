@@ -61,8 +61,7 @@ class Subscriptions extends Component {
                             <Title style={{ color: Colors.pinkA200 }}>  Remaining Tiffin:{item.remaining_tiffin}</Title>
                                             
                             </Card.Actions>
-                            <Text style={{ fontSize: 16, color: Colors.red500, marginLeft: 10 }}> {this.props.message}</Text>
-
+                           
                             
                         </Card>
                     )}
@@ -93,8 +92,8 @@ const styles = {
 };
 
 const mapStateToProps = ({ subscribedPlans }) => {
-    const { data, loading, error, refreshing, skipDate, message } = subscribedPlans;
-    return { data, loading, error, refreshing, skipDate, message };
+    const { data, loading, error, refreshing, skipDate } = subscribedPlans;
+    return { data, loading, error, refreshing, skipDate };
 };
 
 export default connect(mapStateToProps, { subscriptionsFetch, skipDateChange, skipTiffin })(Subscriptions);

@@ -76,15 +76,17 @@ export const subscribePlan = ({ id, tiffin }) => {
                             //image: require('./assets/Dreammeal.png'),
                             currency: 'INR',
                             key: 'rzp_live_yo0KLGcHBcRiqU',
-                            amount: (data.response.result[0].price * 100),  
-                            //order_id: data.response.result[0].id,
-                            //notes: data.response.result[0].subscription_id,               
+                            amount: (data.response.result[0].price * 100),                            
                             name: 'DreamMeal',
-                           
+                            prefill: {
+                              email: 'ramjondhale1@gmail.com',
+                              contact: '8668872541',
+                              name: 'DreamMeal'
+                            },
                             theme: { color: '#528FF0' }
                           };
                           RazorpayCheckout.open(options).then((data1) => {   
-                            dispatch({ type: CURRENT_ORDER_FETCHING });
+                           dispatch({ type: CURRENT_ORDER_FETCHING });
                            
                                 fetch('https://www.dream-meal.com/api/', {
                                 method: 'POST',

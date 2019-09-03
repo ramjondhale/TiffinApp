@@ -16,36 +16,40 @@ class Account extends Component {
         this.props.custLogout();
     }
     
+    onLoad() {
+        
+        if (this.props.data) {
+            const { fname, lname, mobile, email } = this.props.data;
+            return (<View style={styles.container}>
+            
+                <Text style={styles.key}>Name: </Text><Text style={styles.value}>{fname} {lname} {'\n'}</Text>
+                <View style={styles.hairline} />
+                <Text style={styles.key}>Mobile: </Text><Text style={styles.value}>{mobile}{'\n'}</Text>
+                <View style={styles.hairline} />
+                <Text style={styles.key}>Email: </Text><Text style={styles.value}>{email}{'\n'}</Text>
+                <View style={styles.hairline} />         
+                
+                <TouchableOpacity
+                style={styles.buttonBack}
+                //onPress={this.onLocationChange.bind(this)}
+                >
+                <Text style={styles.buttonStyle}>Change Location</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                style={styles.logoutBack}
+                onPress={this.onLogout.bind(this)} 
+                >
+                <Text style={styles.buttonStyle}>Logout</Text>
+                </TouchableOpacity>
     
-    render() {
-       const { fname, lname, mobile, email } = this.props.data;
-       
+                </View>); 
+        }        
+    }
+    render() {       
         return (
             <ScrollView>
-            
-            <View style={styles.container}>
-            
-            <Text style={styles.key}>Name: </Text><Text style={styles.value}>{fname} {lname} {'\n'}</Text>
-            <View style={styles.hairline} />
-            <Text style={styles.key}>Mobile: </Text><Text style={styles.value}>{mobile}{'\n'}</Text>
-            <View style={styles.hairline} />
-            <Text style={styles.key}>Email: </Text><Text style={styles.value}>{email}{'\n'}</Text>
-            <View style={styles.hairline} />         
-            
-            <TouchableOpacity
-            style={styles.buttonBack}
-            //onPress={this.onLocationChange.bind(this)}
-            >
-            <Text style={styles.buttonStyle}>Change Location</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-            style={styles.logoutBack}
-            onPress={this.onLogout.bind(this)} 
-            >
-            <Text style={styles.buttonStyle}>Logout</Text>
-            </TouchableOpacity>
-
-            </View>           
+            {this.onLoad()}
+                 
 
             </ScrollView>                
            

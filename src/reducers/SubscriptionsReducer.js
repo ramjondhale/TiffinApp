@@ -1,5 +1,5 @@
 import { SUBSCRIPTION_FETCHING, SUBSCRIPTION_FETCH_SUCCESS, SUBSCRIPTION_FETCH_ERROR,
-      SKIP_DATE_CHANGE, SKIP_TIFFIN, SKIP_TIFFIN_SUCCESS, SKIP_TIFFIN_ERROR, HIDE_SKIP_NOTIFICATION
+      SKIP_DATE_CHANGE, SKIP_TIFFIN, SKIP_TIFFIN_SUCCESS, SKIP_TIFFIN_ERROR
       } from '../actions/types';
 
 const INITIAL_STATE = { 
@@ -7,9 +7,7 @@ const INITIAL_STATE = {
     error: '',
     data: null,
     refreshing: false,
-    visible: false,
-    skipDate: '',
-    message: '',
+    skipDate: ''
     
 };
 export default (state = INITIAL_STATE, action) => {
@@ -26,9 +24,8 @@ export default (state = INITIAL_STATE, action) => {
         case SKIP_TIFFIN: 
             return { ...state, loading: true };
         case SKIP_TIFFIN_SUCCESS:
-            return { ...state, loading: false, message: 'Tiffin Skiped Successfully', visible: true };
-        case HIDE_SKIP_NOTIFICATION:
-            return { ...state, message: '' };
+            return { ...state, loading: false };
+       
         case SKIP_TIFFIN_ERROR:
                 return { ...state, loading: false, message: 'Something went wrong!', visible: true };
         
