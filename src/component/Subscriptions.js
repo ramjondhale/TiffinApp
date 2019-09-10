@@ -57,7 +57,7 @@ class Subscriptions extends Component {
                        
                             </Card.Content>                    
                             <Card.Actions>
-                            <Button mode="contained" onPress={() => this.onSkip(item.id, this.props.skipDate)}>Skip Tiffin</Button>   
+                            <Button mode="contained" onPress={() => this.onSkip(item.id, this.props.skipDate)} disabled={((item.type === 'Single') ? true : false)}>Skip Tiffin</Button>   
                             <Title style={{ color: Colors.pinkA200 }}>  Remaining Tiffin:{item.remaining_tiffin}</Title>
                                             
                             </Card.Actions>

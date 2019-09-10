@@ -33,10 +33,10 @@ class SubscriptionPlans extends Component {
                             <Card.Cover source={{ uri: item.thumbnail }} />
                             <Card.Content>
                             <Title>{item.title} {'\u20B9'}{item.price}</Title>
-                            <Paragraph>{item.description}</Paragraph>
+                            <Paragraph>{item.description}{item.active}</Paragraph>
                             </Card.Content>                    
                             <Card.Actions>
-                            <Button mode="contained" onPress={() => this.onSubscribe(item.id, item.total_tiffin)}>Subscribe</Button>                   
+                            <Button mode="contained" onPress={() => this.onSubscribe(item.id, item.total_tiffin)} disabled={((item.active === 'true') ? false : true)} >Subscribe</Button>                   
                             </Card.Actions>
                         </Card>
                     )}
